@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoGame | Cars & Games</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Exo+2:wght@300;500&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables */
+        :root 
+        {
+            --primary: #e6007e;
+            --secondary: #00c3ff;
+            --accent: #ffcc00;
+            --dark: #0a0a12;
+            --darker: #050508;
+            --light: #f0f0f5;
+            --gray: #2a2a35;
+        }
+        
+        /* Reset and Base Styles */
+        * 
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body 
+        {
+            background-color: var(--dark);
+            color: var(--light);
+            font-family: 'Exo 2', sans-serif;
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3 
+        {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        p 
+        {
+            margin-bottom: 15px;
+        }
+        
+        .container 
+        {
+            width: 90%;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header Styles */
+        header 
+        {
+            background-color: var(--darker);
+            padding: 15px 0;
+            border-bottom: 2px solid var(--primary);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content 
+        {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo h1 
+        {
+            font-size: 1.8rem;
+            margin: 0;
+        }
+        
+        nav ul 
+        {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav li 
+        {
+            margin-left: 20px;
+        }
+        
+        nav a 
+        {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        
+        nav a:hover 
+        {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        /* Page Styles */
+        .page 
+        {
+            padding: 30px 0;
+        }
+        
+        .hero 
+        {
+            text-align: center;
+            padding: 40px 0;
+            background: radial-gradient(ellipse at center, var(--gray) 0%, transparent 70%);
+            margin-bottom: 30px;
+        }
+        
+        .hero h2 
+        {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .hero p 
+        {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .content-section 
+        {
+            margin: 40px 0;
+        }
+        
+        .btn 
+        {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 15px;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover 
+        {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+        }
+        
+        /* Grid Layout */
+        .grid 
+        {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .card 
+        {
+            background-color: var(--gray);
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.3s;
+            border: 1px solid #444;
+        }
+        
+        .card:hover 
+        {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(230, 0, 126, 0.2);
+            border-color: var(--primary);
+        }
+        
+        .card h3 
+        {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        /* Gallery Styles */
+        .gallery-grid 
+        {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .gallery-item 
+        {
+            height: 150px;
+            background-color: #444;
+            border-radius: 5px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        /* Car Showcase */
+        .car-showcase 
+        {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .car-item 
+        {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: var(--gray);
+            border-radius: 8px;
+            padding: 20px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .car-image 
+        {
+            flex: 1;
+            height: 180px;
+            background-color: #444;
+            border-radius: 5px;
+        }
+        
+        .car-details 
+        {
+            flex: 1;
+        }
+        
+        /* Footer Styles */
+        footer 
+        {
+            background-color: var(--darker);
+            padding: 30px 0 20px;
+            text-align: center;
+            margin-top: 40px;
+            border-top: 1px solid #444;
+        }
+        
+        .footer-content 
+        {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-section 
+        {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-section h4 
+        {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .footer-links 
+        {
+            list-style: none;
+        }
+        
+        .footer-links li 
+        {
+            margin-bottom: 8px;
+        }
+        
+        .footer-links a 
+        {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover 
+        {
+            color: var(--primary);
+        }
+        
+        .copyright 
+        {
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #888;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) 
+        {
+            .header-content 
+            {
+                flex-direction: column;
+            }
+            
+            nav ul 
+            {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav li 
+            {
+                margin: 0 10px;
+            }
+            
+            .hero h2 
+            {
+                font-size: 2rem;
+            }
+            
+            .car-item 
+            {
+                flex-direction: column;
+            }
+            
+            .car-image 
+            {
+                width: 100%;
+            }
+            
+            .footer-content 
+            {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>AutoGame Hub</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#intro">Introduction</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#cars">Cars</a></li>
+                        <li><a href="#games">Games</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Introduction Page -->
+        <section id="intro" class="page">
+            <div class="hero">
+                <h2>Welcome to AutoGame Hub</h2>
+                <p>Your ultimate destination for cars and gaming enthusiasts!</p>
+            </div>
+            
+            <div class="content-section">
+                <h2>What We Offer</h2>
+                <p>AutoGame Hub brings together two exciting worlds - high-performance cars and thrilling video games. Whether you're a car enthusiast, a gamer, or both, you'll find something to love here.</p>
+                
+                <div class="grid">
+                    <div class="card">
+                        <h3>Car Showcases</h3>
+                        <p>Explore amazing vehicles from around the world with detailed specifications and performance data.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Game Reviews</h3>
+                        <p>Get the latest information on racing games and gaming technology.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Community</h3>
+                        <p>Connect with other enthusiasts who share your passion for cars and games.</p>
+                    </div>
+                </div>
+                
+                <a href="#about" class="btn">Learn More About Us</a>
+            </div>
+        </section>
+
+        <!-- About Page -->
+        <section id="about" class="page">
+            <div class="hero">
+                <h2>About AutoGame Hub</h2>
+                <p>Learn more about our mission and what drives us</p>
+            </div>
+            
+            <div class="content-section">
+                <h2>Our Story</h2>
+                <p>AutoGame Hub was founded by a group of college students who shared a passion for both automotive engineering and video games. We noticed that these two interests often overlap, with many car enthusiasts also being avid gamers, and vice versa.</p>
+                
+                <p>Our mission is to create a space where these communities can come together, share knowledge, and celebrate their shared interests.</p>
+                
+                <h2>What We Believe</h2>
+                <p>We believe that the worlds of automotive technology and gaming have more in common than people realize. Both fields push the boundaries of innovation, require precision and skill, and provide thrilling experiences.</p>
+                
+                <p>Whether you're interested in the latest hypercar technology or the newest racing simulator, AutoGame Hub is your go-to resource.</p>
+            </div>
+        </section>
+
+        <!-- Cars Page -->
+        <section id="cars" class="page">
+            <div class="hero">
+                <h2>Featured Cars</h2>
+                <p>Discover amazing vehicles from around the world</p>
+            </div>
+            
+            <div class="content-section">
+                <h2>Popular Models</h2>
+                
+                <div class="car-showcase">
+                    <div class="car-item">
+                        <div class="car-image"></div>
+                        <div class="car-details">
+                            <img src="C:\Users\quilang_r\Desktop\QUILANG_FINAL\PORSCHE 911.jpeg" width="900">
+                            <h3>Porsche 911</h3>
+                            <p>The iconic sports car known for its performance and timeless design. With a rich racing heritage and cutting-edge technology.</p>
+                            <a href="#" class="btn">View Details</a>
+                        </div>
+                    </div>
+                    
+                    <div class="car-item">
+                        <div class="car-image"></div>
+                        <div class="car-details">
+                            <img src="C:\Users\quilang_r\Desktop\QUILANG_FINAL\TeslaModelS.jpeg" width="900">
+                            <h3>Tesla Model S</h3>
+                            <p>Revolutionary electric sedan with incredible acceleration and advanced tech features. The future of automotive innovation.</p>
+                            <a href="#" class="btn">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <h2>Car Technology</h2>
+                <p>Modern cars are becoming increasingly advanced with features like:</p>
+                <ul style="margin: 15px 0 15px 20px;">
+                    <li>Electric and hybrid powertrains</li>
+                    <li>Advanced driver assistance systems</li>
+                    <li>Connected car technology</li>
+                    <li>Performance tuning capabilities</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Games Page -->
+        <section id="games" class="page">
+            <div class="hero">
+                <h2>Gaming Section</h2>
+                <p>Explore the world of racing and automotive games</p>
+            </div>
+            
+            <div class="content-section">
+                <h2>Popular Games</h2>
+                
+                <div class="grid">
+                    <div class="card">
+                        <h3>Forza Horizon</h3>
+                        <p>Open-world racing game with stunning graphics and hundreds of cars. Explore beautiful landscapes while competing in exciting events.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Gran Turismo</h3>
+                        <p>Realistic racing simulator with meticulous car details and physics. The ultimate experience for serious racing enthusiasts.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Need for Speed</h3>
+                        <p>Arcade-style racing with intense police chases and deep customization options. Style and speed combined.</p>
+                    </div>
+                </div>
+                
+                <h2>Gaming Platforms</h2>
+                <p>Today's games are available in many platforms, such as as the following.</p>
+                <ul style="margin: 15px 0 15px 20px;">
+                    <li>PC (Steam, Epic Games)</li>
+                    <li>PlayStation 4 & 5</li>
+                    <li>Xbox One & Series X/S</li>
+                    <li>Nintendo Switch</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Gallery Page -->
+        <section id="gallery" class="page">
+            <div class="hero">
+                <h2>Photo Gallery</h2>
+                <p>Visual showcase of cars and gaming setups</p>
+            </div>
+            
+            <div class="content-section">
+                <h2>Cars Collection</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item" style="background-color: var(--primary);"></div>
+                    <div class="gallery-item" style="background-color: var(--secondary);"></div>
+                    <div class="gallery-item" style="background-color: var(--accent);"></div>
+                    <div class="gallery-item" style="background-color: var(--gray);"></div>
+                    <div class="gallery-item" style="background-color: var(--primary);"></div>
+                    <div class="gallery-item" style="background-color: var(--secondary);"></div>
+                </div>
+                
+                <h2>Gaming Setups</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item" style="background-color: var(--gray);"></div>
+                    <div class="gallery-item" style="background-color: var(--primary);"></div>
+                    <div class="gallery-item" style="background-color: var(--secondary);"></div>
+                    <div class="gallery-item" style="background-color: var(--accent);"></div>
+                    <div class="gallery-item" style="background-color: var(--gray);"></div>
+                    <div class="gallery-item" style="background-color: var(--primary);"></div>
+                </div>
+                
+                <p style="margin-top: 20px; text-align: center;">More images coming soon as we expand our collection!</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>AutoGame Hub</h4>
+                    <p>Where our love for cars and gaming come together as one, in one website by Mabitazan Jem, and Quiliang Raven</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#intro">Introduction</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#cars">Cars</a></li>
+                        <li><a href="#games">Games</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-links">
+                        <li>Email: 20256736@s.ubaguio.edu</li>
+                        <li>Phone: +63 962-556-3001</li>
+                        <li>Address: #4 Gen. del Rosario St., corner Upper Mabini St., Baguio City, Philippines</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 AutoGame Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
